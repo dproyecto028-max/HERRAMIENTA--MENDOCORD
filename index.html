@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grupo Mendcord | Portal Interno</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="introScreen" class="intro-screen active" aria-live="polite">
+      <video id="introVideo" class="intro-video" autoplay muted playsinline>
+        <source src="intro%202.mp4" type="video/mp4" />
+        Tu navegador no soporta videos HTML5.
+      </video>
+    </div>
+
+    <div id="authShell" class="auth-shell active">
+      <div class="auth-panel glass-panel">
+        <div class="brand-lockup">
+          <img class="brand-mark brand-logo" src="LOGO.jpeg" alt="Logo de Grupo Mendcord" />
+          <div>
+            <p class="eyebrow">PORTAL CORPORATIVO - HERRAMIENTA DE TRABAJO</p>
+            <h1>Grupo Mendcord</h1>
+          </div>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Iniciar Sesión</button>
+          <button class="auth-tab" data-tab="register">Registrarse</button>
+        </div>
+
+        <div id="registrationFeedback" class="registration-feedback hidden" role="status" aria-live="polite">
+          <div class="registration-status-line">
+            <strong id="registrationStatus">Preparando el registro...</strong>
+            <span id="registrationElapsed">0 s</span>
+          </div>
+          <div id="registrationProgress" class="registration-progress" role="progressbar" aria-label="Registro en proceso" aria-valuetext="En curso" hidden>
+            <span></span>
+          </div>
+          <p id="registrationHint">Mantén esta ventana abierta mientras procesamos la solicitud.</p>
+        </div>
+
+        <form id="loginForm" class="auth-form active">
+          <label>
+            Correo Corporativo
+              <input type="email" placeholder="usuario@empresa.com" autocomplete="username" required />
+          </label>
+          <label>
+            Contraseña
+              <input type="password" placeholder="Tu contraseña" autocomplete="current-password" required />
+          </label>
+          <div class="row-between">
+            <label class="checkline"><input type="checkbox" checked /> Recordar sesión</label>
+            <a href="#">Olvidé mi contraseña</a>
+          </div>
+          <button type="submit" class="primary-btn">Entrar al portal</button>
+        </form>
+
+        <form id="registerForm" class="auth-form">
+          <div class="form-grid two-col">
+            <label>
+              Nombre
+              <input id="registerName" type="text" placeholder="Nombre" autocomplete="given-name" required />
+            </label>
+            <label>
+              Apellido
+              <input id="registerSurname" type="text" placeholder="Apellido" autocomplete="family-name" required />
+            </label>
+          </div>
+
+          <label>
+            Correo Electrónico Corporativo
+            <input id="registerEmail" type="email" placeholder="nombre@grupomendcord.com" autocomplete="email" required />
+          </label>
+
+          <label>
+            Contraseña segura
+            <input id="registerPassword" type="password" placeholder="Mínimo 8 caracteres" minlength="8" autocomplete="new-password" required />
+          </label>
+
+          <div class="form-grid two-col">
+            <label>
+              Área / Departamento
+              <select id="registerDepartment" required>
+                <option value="Desarrollo">Desarrollo</option>
+                <option value="Comercial/Marketing">Comercial/Marketing</option>
+                <option value="Soporte/Atención al Cliente">Soporte/Atención al Cliente</option>
+                <option value="Administración/Finanzas">Administración/Finanzas</option>
+                <option value="Liderazgo">Liderazgo</option>
+              </select>
+            </label>
+            <label>
+              Cargo / Rol
+              <select id="registerRole" required>
+                <option value="" disabled selected>Selecciona un cargo o función</option>
+                <optgroup label="Dirección">
+                  <option value="Fundador / CEO">Fundador / CEO</option>
+                </optgroup>
+                <optgroup label="Desarrollo">
+                  <option value="Backend">Backend</option>
+                  <option value="Frontend">Frontend</option>
+                  <option value="QA">QA</option>
+                </optgroup>
+                <optgroup label="Marketing">
+                  <option value="Branding">Branding</option>
+                  <option value="Growth">Growth</option>
+                  <option value="Ads">Ads</option>
+                </optgroup>
+                <optgroup label="Soporte">
+                  <option value="Atención">Atención</option>
+                  <option value="Cliente">Cliente</option>
+                  <option value="Infra">Infra</option>
+                </optgroup>
+                <optgroup label="Administración">
+                  <option value="Finanzas">Finanzas</option>
+                  <option value="RRHH">RRHH</option>
+                  <option value="Legal">Legal</option>
+                </optgroup>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            Región
+            <select id="registerRegion" required>
+              <option value="" disabled selected>Selecciona tu provincia</option>
+              <option value="MENDOZA">MENDOZA</option>
+              <option value="SAN LUIS">SAN LUIS</option>
+              <option value="SAN JUAN">SAN JUAN</option>
+              <option value="CORDOBA">CÓRDOBA</option>
+            </select>
+          </label>
+
+          <label>
+            Teléfono / WhatsApp
+            <input id="registerPhone" type="tel" placeholder="+54 9 11 5555 1234" autocomplete="tel" required />
+          </label>
+
+          <button type="submit" class="primary-btn">Crear cuenta</button>
+        </form>
+      </div>
+    </div>
+
+    <div id="appShell" class="app-shell hidden">
+      <aside class="sidebar glass-panel">
+        <div class="sidebar-brand">
+          <img class="brand-mark brand-logo small" src="LOGO.jpeg" alt="Logo de Grupo Mendcord" />
+          <div>
+            <p class="eyebrow">MENDCORD</p>
+            <h2>Workspace</h2>
+          </div>
+        </div>
+
+        <nav class="nav-menu">
+          <button class="nav-btn active" data-target="dashboard"><span>⌂</span> Dashboard</button>
+          <button class="nav-btn" data-target="equipo"><span>◉</span> Equipo</button>
+          <button class="nav-btn" data-target="proyectos"><span>▣</span> Proyectos</button>
+          <button class="nav-btn" data-target="wiki"><span>▤</span> Base de conocimiento</button>
+          <button class="nav-btn" data-target="calendario"><span>◫</span> Calendario</button>
+          <button class="nav-btn" data-target="perfil"><span>◎</span> Mi perfil</button>
+        </nav>
+
+        <div class="sidebar-status">
+          <div>
+            <p class="status-label">Estado del sistema</p>
+            <strong class="online-pill">Operativo · 99.98%</strong>
+          </div>
+        </div>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar glass-panel">
+          <div>
+            <p class="eyebrow muted">Bienvenido de nuevo</p>
+            <h3 id="welcomeTitle">Alicia Torres</h3>
+          </div>
+
+          <div class="topbar-actions">
+            <div class="local-time">
+              <span class="dot-green"></span>
+              <span id="localTime">--:--:--</span>
+            </div>
+            <button class="icon-btn" id="commandLauncher" aria-label="Abrir comandos">⌘K</button>
+            <div class="user-mini">
+              <div class="avatar avatar-aurora">AT</div>
+              <div>
+                <strong id="miniName">Alicia T.</strong>
+                <small id="miniRole">Líder de Desarrollo</small>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section id="dashboard" class="view active">
+          <div class="hero-grid">
+            <div class="hero-card glass-panel">
+              <div class="hero-meta">
+                <span class="chip chip-cyan">Sprint activo</span>
+                <span class="chip">Q3 / 2026</span>
+              </div>
+              <h2>Operación digital en movimiento.</h2>
+              <p>El equipo está impulsando automatizaciones, consolidación del CRM y mejora de procesos para más de 20 clientes activos.</p>
+              <div class="hero-metrics mini-grid">
+                <div>
+                  <strong>46</strong>
+                  <span>Tickets resueltos</span>
+                </div>
+                <div>
+                  <strong>18</strong>
+                  <span>Proyectos activos</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="glass-panel board-ticker">
+              <div class="board-header">
+                <h4>Anuncios internos</h4>
+                <button class="pin-btn">Fijado</button>
+              </div>
+              <ul>
+                <li><span class="dot-cyan"></span> Nuevo proceso de onboarding para clientes.</li>
+                <li><span class="dot-violet"></span> Reunión semanal de ventas el jueves 9:30.</li>
+                <li><span class="dot-emerald"></span> Comienza la campaña de automatización B2B.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card glass-panel">
+              <div class="metric-head">
+                <span>Servidores</span>
+                <span class="metric-trend up">+2.3%</span>
+              </div>
+              <strong data-value="96">0</strong>
+              <small>Disponibilidad general</small>
+            </article>
+            <article class="metric-card glass-panel">
+              <div class="metric-head">
+                <span>Tickets</span>
+                <span class="metric-trend up">+14</span>
+              </div>
+              <strong data-value="142">0</strong>
+              <small>Abiertos / Resueltos</small>
+            </article>
+            <article class="metric-card glass-panel">
+              <div class="metric-head">
+                <span>Ventas</span>
+                <span class="metric-trend up">+8.6%</span>
+              </div>
+              <strong data-value="86">0</strong>
+              <small>Objetivos del mes</small>
+            </article>
+            <article class="metric-card glass-panel">
+              <div class="metric-head">
+                <span>Proyectos</span>
+                <span class="metric-trend neutral">7</span>
+              </div>
+              <strong data-value="18">0</strong>
+              <small>Activos en desarrollo</small>
+            </article>
+          </div>
+
+          <div class="bottom-grid">
+            <div class="glass-panel quick-access">
+              <div class="section-header">
+                <h4>Accesos rápidos</h4>
+              </div>
+              <div class="quick-grid">
+                <button class="quick-item"><span>◌</span> Drive</button>
+                <button class="quick-item"><span>◌</span> Repositorio</button>
+                <button class="quick-item"><span>◌</span> Facturación</button>
+                <button class="quick-item"><span>◌</span> Chat interno</button>
+              </div>
+            </div>
+
+            <div class="glass-panel activity-panel">
+              <div class="section-header">
+                <h4>Actividad reciente</h4>
+              </div>
+              <ul class="feed-list">
+                <li><strong>CRM</strong> — Automatización de lead scoring completada.</li>
+                <li><strong>Marketing</strong> — Campaña de redes enviada a revisión.</li>
+                <li><strong>Soporte</strong> — Ticket #1842 marcado como resuelto.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="equipo" class="view">
+          <div class="section-head">
+            <h3>Organigrama y directorio</h3>
+            <div class="pill-group">
+              <span class="chip chip-violet">Fundador</span>
+              <span class="chip chip-cyan">Liderazgo</span>
+              <span class="chip chip-emerald">Departamentos</span>
+            </div>
+          </div>
+
+          <div class="org-structure glass-panel">
+            <div class="org-level root">
+              <div class="org-node node-main">Fundador / CEO</div>
+            </div>
+            <div class="org-branches">
+              <div class="org-column">
+                <div class="org-node node-dev">Desarrollo</div>
+                <div class="subnodes">
+                  <span>Backend</span>
+                  <span>Frontend</span>
+                  <span>QA</span>
+                </div>
+              </div>
+              <div class="org-column">
+                <div class="org-node node-mark">Marketing</div>
+                <div class="subnodes">
+                  <span>Branding</span>
+                  <span>Growth</span>
+                  <span>Ads</span>
+                </div>
+              </div>
+              <div class="org-column">
+                <div class="org-node node-sup">Soporte</div>
+                <div class="subnodes">
+                  <span>Atención</span>
+                  <span>Cliente</span>
+                  <span>Infra</span>
+                </div>
+              </div>
+              <div class="org-column">
+                <div class="org-node node-admin">Administración</div>
+                <div class="subnodes">
+                  <span>Finanzas</span>
+                  <span>RRHH</span>
+                  <span>Legal</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="directory-grid" id="directoryGrid"></div>
+        </section>
+
+        <section id="proyectos" class="view">
+          <div class="section-head">
+            <h3>Tablero de tareas</h3>
+            <div class="toolbar">
+              <select id="taskFilter">
+                <option value="all">Todos</option>
+                <option value="Desarrollo">Desarrollo</option>
+                <option value="Marketing">Marketing</option>
+                <option value="Soporte">Soporte</option>
+                <option value="Administración">Administración</option>
+              </select>
+              <button class="primary-btn small-btn" id="newTaskBtn">+ Nueva tarea</button>
+            </div>
+          </div>
+
+          <div id="taskBoard" class="kanban-board"></div>
+        </section>
+
+        <section id="wiki" class="view">
+          <div class="section-head">
+            <h3>Base de conocimiento</h3>
+            <input id="wikiSearch" type="search" placeholder="Buscar documento, proceso o guía..." />
+          </div>
+
+          <div class="wiki-cards" id="wikiCards"></div>
+        </section>
+
+        <section id="calendario" class="view">
+          <div class="section-head">
+            <h3>Calendario central</h3>
+            <button class="primary-btn small-btn" id="requestLeaveBtn">Solicitar licencia</button>
+          </div>
+
+          <div class="calendar-layout">
+            <div class="glass-panel calendar-panel">
+              <div class="calendar-month">Septiembre 2026</div>
+              <div class="calendar-grid">
+                <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span><span>S</span><span>D</span>
+                <button class="day muted">31</button>
+                <button class="day">1</button>
+                <button class="day">2</button>
+                <button class="day">3</button>
+                <button class="day active">4</button>
+                <button class="day">5</button>
+                <button class="day">6</button>
+                <button class="day">7</button>
+                <button class="day flagged">8</button>
+                <button class="day">9</button>
+                <button class="day">10</button>
+                <button class="day">11</button>
+                <button class="day">12</button>
+                <button class="day">13</button>
+                <button class="day">14</button>
+                <button class="day">15</button>
+                <button class="day flagged">16</button>
+                <button class="day">17</button>
+                <button class="day">18</button>
+                <button class="day">19</button>
+                <button class="day">20</button>
+                <button class="day">21</button>
+                <button class="day">22</button>
+                <button class="day">23</button>
+                <button class="day">24</button>
+                <button class="day">25</button>
+                <button class="day flagged">26</button>
+                <button class="day">27</button>
+                <button class="day">28</button>
+                <button class="day">29</button>
+                <button class="day">30</button>
+                <button class="day muted">1</button>
+              </div>
+            </div>
+
+            <div class="glass-panel events-panel">
+              <h4>Eventos clave</h4>
+              <ul class="events-list">
+                <li><span class="event-tag cyan">Sprint</span> Demo de producto — 04/09</li>
+                <li><span class="event-tag violet">Ventas</span> Revisión trimestral — 08/09</li>
+                <li><span class="event-tag emerald">Cumpleaños</span> Sofía R. — 16/09</li>
+                <li><span class="event-tag cyan">Cliente</span> Entrega fase 2 — 26/09</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="perfil" class="view">
+          <div class="section-head">
+            <h3>Mi perfil personal</h3>
+          </div>
+
+          <div class="profile-layout glass-panel">
+            <div class="profile-card-preview">
+              <div class="avatar avatar-large">AT</div>
+              <div>
+                <h4 id="profileName">Alicia Torres</h4>
+                <p id="profileRole">Líder de Desarrollo</p>
+                <div class="status-row"><span class="online-dot"></span> En línea</div>
+              </div>
+            </div>
+
+            <form id="profileForm" class="profile-form">
+              <div class="form-grid two-col">
+                <label>
+                  Nombre y apellido
+                  <input type="text" id="inputName" value="Alicia Torres" />
+                </label>
+                <label>
+                  Estado actual
+                  <select id="inputStatus">
+                    <option>En línea</option>
+                    <option>En reunión</option>
+                    <option>Ausente</option>
+                    <option>De vacaciones</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="form-grid two-col">
+                <label>
+                  Cargo
+                  <input type="text" id="inputRole" value="Líder de Desarrollo" />
+                </label>
+                <label>
+                  Departamento
+                  <input type="text" id="inputDept" value="Desarrollo" />
+                </label>
+              </div>
+
+              <label>
+                Biografía
+                <textarea id="inputBio" rows="3">Especialista en arquitectura digital, automatización y mejora continua de sistemas.</textarea>
+              </label>
+
+              <label>
+                Habilidades
+                <input type="text" id="inputSkills" value="Product Design, Node.js, API Integrations, Architecture" />
+              </label>
+
+              <button type="submit" class="primary-btn">Guardar perfil</button>
+            </form>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="commandPalette" class="command-palette hidden">
+      <div class="command-window glass-panel">
+        <div class="command-header">
+          <span>Comandos</span>
+          <button class="close-btn" aria-label="Cerrar">✕</button>
+        </div>
+        <input id="commandInput" type="text" placeholder="Buscar función, usuario o documento..." />
+        <ul id="commandList"></ul>
+      </div>
+    </div>
+
+    <div id="taskModal" class="task-modal hidden">
+      <div class="glass-panel task-window">
+        <div class="command-header">
+          <span>Nueva tarea</span>
+          <button class="close-btn" aria-label="Cerrar tarea">✕</button>
+        </div>
+
+        <form id="taskForm">
+          <label>
+            Título
+            <input type="text" id="taskTitle" required />
+          </label>
+          <label>
+            Descripción
+            <textarea id="taskDescription" rows="3"></textarea>
+          </label>
+          <div class="form-grid two-col">
+            <label>
+              Responsable
+              <select id="taskOwner"></select>
+            </label>
+            <label>
+              Prioridad
+              <select id="taskPriority">
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+                <option value="Crítica">Crítica</option>
+              </select>
+            </label>
+          </div>
+          <label>
+            Área
+            <select id="taskArea">
+              <option value="Desarrollo">Desarrollo</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Soporte">Soporte</option>
+              <option value="Administración">Administración</option>
+            </select>
+          </label>
+          <label>
+            Fecha límite
+            <input type="date" id="taskDueDate" />
+          </label>
+          <button type="submit" class="primary-btn">Crear tarjeta</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
